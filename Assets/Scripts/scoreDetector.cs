@@ -7,14 +7,19 @@ public class scoreDetector : MonoBehaviour
 {
     public int score;
     public int displayScore;
+    public int opponentScore;
+    public int displayOpponentScore;
     public Text scoreUI;
+    
     // Start is called before the first frame update
     void Start()
     {
         score = 0;
+        opponentScore = 0;
         displayScore = 0;
-        scoreUI.text = "Score: " + displayScore;
- 
+        displayOpponentScore = 0;
+        scoreUI.text = "Score: " + displayScore.ToString() + '\n' + "Opponent Score: " + displayOpponentScore.ToString();
+
         StartCoroutine(ScoreUpdater());
    
     }
@@ -26,8 +31,15 @@ public class scoreDetector : MonoBehaviour
             if(displayScore < score)
             {
                 displayScore++;
-                scoreUI.text = "Score: " + displayScore.ToString();
+                scoreUI.text = "Score: " + displayScore.ToString() + '\n' + "Opponent Score: " + displayOpponentScore.ToString();
             }
+
+            if(displayOpponentScore < opponentScore)
+            {
+                displayOpponentScore++;
+                scoreUI.text = "Score: " + displayScore.ToString() + '\n' + "Opponent Score: " + displayOpponentScore.ToString();
+            }
+
             yield return new WaitForSeconds(0.2f);
         }
 
@@ -44,8 +56,13 @@ public class scoreDetector : MonoBehaviour
     {
         if(collision.gameObject.tag =="Ball")
         {
-            score = score + 5;
+            score++;
            
+        }
+
+        if(collision.gameObject.tag =="OpBall")
+        {
+            opponentScore++;
         }
     }
 }

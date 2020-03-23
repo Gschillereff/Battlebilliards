@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+  
     public static float speed = 500;
     public Rigidbody rb;
     public bool boosting = false;
     public static float boostSpeed = 3000;
     public float boostTime = 2.0f;
     public float currentBoostTime;
-    public float currentBoostDelayTime;
+    public static int boostNum;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         currentBoostTime = 0f;
-        currentBoostDelayTime = 0f;
+      
+        boostNum = 0;
     }
 
     // Update is called once per frame
@@ -32,16 +34,17 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         rb.AddForce(movement*speed*Time.deltaTime);
 
-        if(Input.GetKeyDown(KeyCode.Space) && !boosting && Time.time > currentBoostDelayTime)
+        if(Input.GetKeyDown(KeyCode.Space) && !boosting && boostNum > 0)
         {
             currentBoostTime = Time.time + boostTime;
             boosting = true;
+            boostNum--;
         }
 
         if((Time.time > currentBoostTime) && boosting)
         {
             boosting = false;
-            currentBoostDelayTime = Time.time + currentBoostDelayTime;
+ 
         }
 
         if(boosting)
@@ -54,4 +57,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+
 }
