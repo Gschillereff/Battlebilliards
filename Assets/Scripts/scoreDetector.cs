@@ -44,7 +44,7 @@ public class scoreDetector : MonoBehaviour
     {
         if(collision.gameObject.tag =="Ball")
         {
-            score++;
+            score = score + 5;
            
         }
     }
