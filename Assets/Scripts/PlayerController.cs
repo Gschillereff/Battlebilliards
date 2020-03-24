@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
   
-    public static float speed = 500;
+    public float speed = 1000;
     public Rigidbody rb;
     public bool boosting = false;
     public static float boostSpeed = 3000;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            speed = 500;
+            speed = 1000;
         }
 
     }

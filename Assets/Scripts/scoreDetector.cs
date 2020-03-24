@@ -57,12 +57,14 @@ public class scoreDetector : MonoBehaviour
         if(collision.gameObject.tag =="Ball")
         {
             score++;
-           
+            
+           //Add destroy on collison to ball script
         }
 
         if(collision.gameObject.tag =="OpBall")
         {
             opponentScore++;
+          
         }
     }
 }
