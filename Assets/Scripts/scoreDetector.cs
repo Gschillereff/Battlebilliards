@@ -10,6 +10,7 @@ public class scoreDetector : MonoBehaviour
     public int opponentScore;
     public int displayOpponentScore;
     public Text scoreUI;
+  
     
     // Start is called before the first frame update
     void Start()
@@ -26,24 +27,24 @@ public class scoreDetector : MonoBehaviour
 
     private IEnumerator ScoreUpdater()
     {
-        while(true)
+        while (true)
         {
-            if(displayScore < score)
-            {
-                displayScore++;
-                scoreUI.text = "Score: " + displayScore.ToString() + '\n' + "Opponent Score: " + displayOpponentScore.ToString();
-            }
+           
 
-            if(displayOpponentScore < opponentScore)
-            {
-                displayOpponentScore++;
-                scoreUI.text = "Score: " + displayScore.ToString() + '\n' + "Opponent Score: " + displayOpponentScore.ToString();
-            }
+                if (displayScore < score)
+                {
+                    displayScore++;
+                    scoreUI.text = "Score: " + displayScore.ToString() + '\n' + "Opponent Score: " + displayOpponentScore.ToString();
+                }
 
-            yield return new WaitForSeconds(0.2f);
+                if (displayOpponentScore < opponentScore)
+                {
+                    displayOpponentScore++;
+                    scoreUI.text = "Score: " + displayScore.ToString() + '\n' + "Opponent Score: " + displayOpponentScore.ToString();
+                }
+
+                yield return new WaitForSeconds(0.2f);
         }
-
-        
     }
 
     // Update is called once per frame
