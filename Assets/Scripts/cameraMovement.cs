@@ -17,5 +17,9 @@ public class cameraMovement : MonoBehaviour
     void Update()
     {
         transform.position = player.transform.position + offset;
+        if(GameObject.Find("Player(Clone") == true)
+        {
+            player = GameObject.Find("Player(Clone");
+        }
     }
 }

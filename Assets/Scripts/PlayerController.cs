@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
   
     public float speed = 1000;
@@ -12,19 +14,30 @@ public class PlayerController : MonoBehaviour
     public float boostTime = 2.0f;
     public float currentBoostTime;
     public static int boostNum;
+    public static int health;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         currentBoostTime = 0f;
-      
+        health = 1;
         boostNum = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!isLocalPlayer)
+        {
+            return;
+        }
         movePlayer();
+        if(health == 0)
+        {
+            //Destroy(gameObject);
+            health = 1;
+            RpcRespawn();
+        }
     }
 
     void movePlayer()
@@ -58,5 +71,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
+
+    [ClientRpc]
+    void RpcRespawn()
+    {
+        if (isLocalPlayer)
+        {
+            Vector3 respawn = new Vector3(0, 0, 0);
+            transform.position = respawn;
+        }
+    }
 
 }
