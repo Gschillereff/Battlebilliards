@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class scoreDetector : MonoBehaviour
 {
@@ -65,7 +66,13 @@ public class scoreDetector : MonoBehaviour
         if(collision.gameObject.tag =="OpBall")
         {
             opponentScore++;
-          
         }
+
+       
+           if (collision.gameObject.tag == "Player")
+            {
+                PlayerController.health = 0;
+            }
+
     }
 }
